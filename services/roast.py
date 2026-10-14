@@ -10,7 +10,7 @@ client = genai.Client(api_key=api_key)
 def format_data(data):
     lines = []
     for category, items in data.items():
-        lable = category.replace("_", "").title()
+        lable = category.replace("_", " ").title()
         lines.append(f"{lable}: {', '.join(items)}")
     return "\n".join(lines)
 
