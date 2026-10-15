@@ -37,7 +37,7 @@ def callback():
     if request.args.get("state") != session["oauth_state"]:
         return "Invalid OAuth state", 400
     
-    redirect_uri = "http://localhost:5000/callback"
+    redirect_uri = "https://youtube-roast-app-production.up.railway.app/callback"
     credentials = get_credentials(redirect_uri, request.url, session["code_verifer"])
 
     session["credentials"] = credentials.to_json()
