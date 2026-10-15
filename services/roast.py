@@ -9,9 +9,20 @@ client = genai.Client(api_key=api_key)
 
 def format_data(data):
     lines = []
+
     for category, items in data.items():
-        lable = category.replace("_", " ").title()
-        lines.append(f"{lable}: {', '.join(items)}")
+        label = category.replace("_", " ").title()
+        lines.append(f"{label}:")
+
+        for item in items:
+            if isinstance(item, dict):
+                details = ", ".join( f"{key}: {value}" for key, value in item.items())
+                lines.append(f"- {details}")
+            else:
+                lines.append(f"- {item}")
+
+        lines.append("")
+
     return "\n".join(lines)
 
 def generate_roast(data):
