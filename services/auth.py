@@ -4,6 +4,8 @@ from google_auth_oauthlib.flow import Flow
 
 load_dotenv()
 
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
 SCOPES = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 GOOGLE_CLIENT_CONFIG = {
