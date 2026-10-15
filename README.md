@@ -74,10 +74,10 @@ Environment variables
 
 The application uses environment variables for API credentials and application configuration.
 
-GEMINI_API_KEY=your_gemini_api_key
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-FLASK_SECRET_KEY=your_flask_secret_key
+|GEMINI_API_KEY=your_gemini_api_key|
+|GOOGLE_CLIENT_ID=your_google_client_id|
+|GOOGLE_CLIENT_SECRET=your_google_client_secret|
+|FLASK_SECRET_KEY=your_flask_secret_key|
 
 These values must be configured locally or in the deployment environment. Never commit actual API keys, client secrets, or ".env" files to a public repository.
 
@@ -124,10 +124,10 @@ Some errors appeared only after deploying the application. Repeatedly changing s
 
 What I learned:
 
-- How to use deployment logs to locate Python exceptions.
-- Why reading a traceback is more effective than guessing at a fix.
-- How to trace errors across Flask routes, service modules, and external libraries.
-- Why confirming the deployed Git commit matters when a fix appears not to take effect.
+ - How to use deployment logs to locate Python exceptions.
+ - Why reading a traceback is more effective than guessing at a fix.
+ - How to trace errors across Flask routes, service modules, and external libraries.
+ - Why confirming the deployed Git commit matters when a fix appears not to take effect.
 
 5. Integrating External APIs
 
@@ -135,9 +135,9 @@ The project combines Google authentication, the YouTube Data API, and the Gemini
 
 What I learned:
 
-- How different APIs fit together in a web application.
-- How OAuth credentials are used to make authorized API requests.
-- How to organize API-related logic into separate service modules.
+ - How different APIs fit together in a web application.
+ - How OAuth credentials are used to make authorized API requests.
+ - How to organize API-related logic into separate service modules.
 
 🔒 Security Considerations
 
