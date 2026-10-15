@@ -16,16 +16,17 @@ Connect your YouTube account, choose your language, and let AI judge your viewin
 
 🛠️ Tech Stack
 
-Technology| Purpose
-Python| Backend logic
-Flask| Web application framework
-Google OAuth 2.0| Authentication and authorization
-YouTube Data API v3| Accessing YouTube account data
-Google Gemini API| Generating AI-powered roasts
-HTML and CSS| Web interface and styling
-Gunicorn| Production WSGI server
-Railway| Application deployment
-Git and GitHub| Version control and source code hosting
+|Technology| Purpose|
+|---|---|
+|Python| Backend logic|
+|Flask| Web application framework|
+|Google OAuth 2.0| Authentication and authorization|
+|YouTube Data API v3| Accessing YouTube account data|
+|Google Gemini API| Generating AI-powered roasts|
+|HTML and CSS| Web interface and styling|
+|Gunicorn| Production WSGI server|
+|Railway| Application deployment|
+|Git and GitHub| Version control and source code hosting|
 
 📁 Project Structure
 
@@ -152,12 +153,6 @@ YouTube Roast is an independent entertainment project and is not affiliated with
 
 The generated roasts are AI-generated humor and may not accurately reflect a user's interests or personality.
 
-👨‍💻 Author
-
-Sanjib Nath
+👨‍💻 Author: Sanjib Nath
 
 Built as a hands-on project to explore Python web development, API integration, OAuth authentication, AI-powered features, and production deployment.
-
----
-
-Your YouTube activity is the evidence. The roast is the verdict. 🔥
