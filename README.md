@@ -29,6 +29,7 @@ Git and GitHub| Version control and source code hosting
 
 📁 Project Structure
 
+```text
 YouTube-Roast-App/
 ├── app.py
 ├── services/
@@ -39,11 +40,9 @@ YouTube-Roast-App/
 │   ├── base.html
 │   ├── index.html
 │   └── roast.html
-├── static/
-│   └── style.css
-├── .env
-├── .gitignore
-└── requirements.txt
+└── static/
+    └── style.css
+```
 
 ⚙️ How It Works
 
