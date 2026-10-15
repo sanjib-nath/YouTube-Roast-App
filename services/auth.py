@@ -4,8 +4,6 @@ from google_auth_oauthlib.flow import Flow
 
 load_dotenv()
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
 SCOPES = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 GOOGLE_CLIENT_CONFIG = {
@@ -14,13 +12,13 @@ GOOGLE_CLIENT_CONFIG = {
         "client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
-        "redirect_uris": ["http://localhost:5000/callback"]
+        "redirect_uris": ["https://youtube-roast-app-production.up.railway.app/callback"]
     }
 }
 
 def create_oauth_flow(state=None):
     flow = Flow.from_client_config(GOOGLE_CLIENT_CONFIG, scopes=SCOPES, state=state)
-    flow.redirect_uri = "http://localhost:5000/callback"
+    flow.redirect_uri = "https://youtube-roast-app-production.up.railway.app/callback"
     return flow
 
 def get_authorization_url():
