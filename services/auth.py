@@ -27,6 +27,7 @@ def get_authorization_url():
     flow = create_oauth_flow()
     auth_url, state = flow.authorization_url(
         access_type = "offline",
+        prompt="consent",
         include_granted_scopes = "true"
     )
 

@@ -16,7 +16,7 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 def index():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     auth_url, state, code_verifer = get_authorization_url()
     session["code_verifer"] = code_verifer
@@ -44,6 +44,15 @@ def roast():
         return redirect(url_for("login"))
 
     credentials_info = json.loads(credentials_json)
+
+    if not credentials_info.get("refresh_token"):
+        session.pop("credentials", None)
+        return (
+            "Google did not provide a refresh token. "
+            "Please revoke this app's access in your Google Account "
+            "and sign in again.",
+            401
+        )
 
     credentials = Credentials.from_authorized_user_info(credentials_info)
 
