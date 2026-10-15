@@ -1,9 +1,11 @@
-import os
+import os, json
 from dotenv import load_dotenv
-from flask import Flask, render_template, session, redirect, request
+from flask import Flask, render_template, session, redirect, request, url_for
 from services.roast import generate_roast
+from google.oauth2.credentials import Credentials
 
 from services.auth import get_authorization_url, get_credentials
+from services.youtube import create_yt_clinet, get_user_data
 
 load_dotenv()
 
@@ -16,7 +18,8 @@ def index():
 
 @app.route('/login')
 def login():
-    auth_url, state = get_authorization_url()
+    auth_url, state, code_verifer = get_authorization_url()
+    session["code_verifer"] = code_verifer
     session["oauth_state"] = state
     return redirect(auth_url)
 
@@ -26,24 +29,29 @@ def callback():
         return "Invalid OAuth state", 400
     
     redirect_uri = "http://localhost:5000/callback"
-    get_credentials(redirect_uri, request.url)
-    
-    return "Google authentication successful!"
+    credentials = get_credentials(redirect_uri, request.url, session["code_verifer"])
+
+    session["credentials"] = credentials.to_json()
+    session.pop("oauth_state", None)
+
+    return redirect(url_for("roast"))
 
 @app.route('/roast')
 def roast():
-    test_data = {
-        "subscriptions": ["MrBeast", "Gordon Ramsay", "Lofi Girl", "Minecraft Let's Plays"],
-        "liked_videos": [
-            "10 Hour Rain Sounds",
-            "How to Become a Millionaire by 25",
-            "Cat Falls Off Couch Compilation",
-        ],
-        "playlists": ["Gym Motivation", "Study Music", "Watch Later (2,347 videos)"],
-    }
+    credentials_json = session.get("credentials")
 
-    roast_text = generate_roast(test_data)
-    return render_template('roast.html', roast=roast_text)
+    if not credentials_json:
+        return redirect(url_for("login"))
+
+    credentials_info = json.loads(credentials_json)
+
+    credentials = Credentials.from_authorized_user_info(credentials_info)
+
+    youtube = create_yt_clinet(credentials)
+    data = get_user_data(youtube)
+    roast_text = generate_roast(data)
+
+    return render_template("roast.html", roast = roast_text)
 
 if __name__ == '__main__':
     app.run()
