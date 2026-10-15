@@ -25,7 +25,7 @@ def format_data(data):
 
     return "\n".join(lines)
 
-def generate_roast(data):
+def generate_roast(data, language="English"):
     formatted_data = format_data(data)
 
     prompt = f"""
@@ -48,6 +48,7 @@ def generate_roast(data):
     - End with a devastating final punchline that sums up their entire YouTube personality.
 
     Their YouTube data: {formatted_data}
+    Roast Language: {language}
     """
 
     responce = client.models.generate_content(

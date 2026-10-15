@@ -18,6 +18,15 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    if request.method == 'POST':
+        language = request.form.get('language', 'English')
+
+        if language not in ('English', 'Hindi'):
+            language = 'English'
+
+        session["language"] = language
+
     auth_url, state, code_verifer = get_authorization_url()
     session["code_verifer"] = code_verifer
     session["oauth_state"] = state
@@ -58,7 +67,7 @@ def roast():
 
     youtube = create_yt_clinet(credentials)
     data = get_user_data(youtube)
-    roast_text = generate_roast(data)
+    roast_text = generate_roast(data, session["language"])
 
     return render_template("roast.html", roast = roast_text)
 
