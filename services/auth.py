@@ -4,6 +4,8 @@ from google_auth_oauthlib.flow import Flow
 
 load_dotenv()
 
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
 SCOPES = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 GOOGLE_CLIENT_CONFIG = {
@@ -28,10 +30,11 @@ def get_authorization_url():
         include_granted_scopes = "true"
     )
 
-    return auth_url, state
+    return auth_url, state, flow.code_verifier
 
-def get_credentials(redirect_url, callback_url):
+def get_credentials(redirect_url, callback_url, code_verifer):
     flow = create_oauth_flow()
+    flow.code_verifier = code_verifer
     flow.redirect_uri = redirect_url
     flow.fetch_token(authorization_response = callback_url)
 
