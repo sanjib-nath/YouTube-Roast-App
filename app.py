@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect
+from flask import Flask, render_template, session, redirect, request
 from services.roast import generate_roast
 from google_auth_oauthlib.flow import Flow
 
@@ -46,7 +46,16 @@ def login():
 
 @app.route('/callback')
 def callback():
-    pass
+    if request.args.get("state") != session.get("oauth_state"):
+        return "Invalid OAuth state", 400
+
+    flow = Flow.from_client_config(GOOGLE_CLIENT_CONFIG, scopes=SCOPES, state=session["oauth_state"])
+    flow.redirect_uri = "http://localhost:5000/callback"
+    flow.fetch_token(authorization_response=request.url)
+
+    credentials = flow.credentials
+
+    return "Google authentication successful!"
 
 @app.route('/roast')
 def roast():
