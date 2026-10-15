@@ -1,14 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Roast App</title>
+    <title>YouTube Roast</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <div class="container">
-        <p>Think you can handle the truth? Click below and prepare to get absolutely roasted. 💀</p>
-        <a href="roast">Connect YouTube</a>
+        <h1>YouTube Roast 💀</h1>
+        <p>Think you can handle the truth? Connect your YouTube account and prepare to get roasted.</p>
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="language">Choose language:</label>
+
+            <select name="language" id="language">
+                <option value="English">English</option>
+                <option value="Hindi">हिन्दी (Hindi)</option>
+            </select>
+
+            <button type="submit">Connect YouTube</button>
+        </form>
     </div>
 </body>
 </html>

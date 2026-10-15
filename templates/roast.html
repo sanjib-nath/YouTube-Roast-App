@@ -1,13 +1,52 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ 'hi' if language == 'Hindi' else 'en' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your Roast 💀</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
-<body>
-    <div class="container">
-        <p>{{ roast }}</p>
+<body class="roast-page">
+
+    <div class="laughing-emojis" aria-hidden="true">
+        <span>😂</span>
+        <span>🤣</span>
+        <span>😂</span>
+        <span>🤣</span>
+        <span>😂</span>
+        <span>🤣</span>
+        <span>😂</span>
+        <span>🤣</span>
     </div>
+
+    <main class="roast-container">
+        <h1>💀 Your YouTube Roast 💀</h1>
+        <p class="subtitle">Your YouTube history has no mercy.</p>
+
+        <div class="roast-box">
+            <p>{{ roast }}</p>
+        </div>
+
+        <a class="roast-button" href="{{ url_for('login') }}">
+            😂 Roast Again
+        </a>
+    </main>
+
+    <audio id="laugh-sound"
+           src="{{ url_for('static', filename='sounds/laugh.mp3') }}"
+           preload="auto"></audio>
+
+    <script>
+        window.addEventListener("load", () => {
+            const sound = document.getElementById("laugh-sound");
+
+            sound.volume = 0.4;
+            sound.play().catch(() => {
+                // Browsers may block audio until the user interacts.
+            });
+        });
+    </script>
+
 </body>
 </html>
